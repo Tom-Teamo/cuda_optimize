@@ -1,0 +1,1 @@
+add_executable(float_4 float4.cu)

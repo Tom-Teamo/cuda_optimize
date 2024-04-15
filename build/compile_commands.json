@@ -1,0 +1,107 @@
+[
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/reduce",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler   -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce/reduction.cu -o CMakeFiles/reduce.dir/reduction.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce/reduction.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm2.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_2.cu -o CMakeFiles/gemm2.dir/gemm_2.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_2.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm3.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_3.cu -o CMakeFiles/gemm3.dir/gemm_3.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_3.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm4.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_4.cu -o CMakeFiles/gemm4.dir/gemm_4.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_4.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm4_1DBlockTile.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_4_block1Dtile.cu -o CMakeFiles/gemm4_1DBlockTile.dir/gemm_4_block1Dtile.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_4_block1Dtile.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm4_2DBlockTile.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_4_block2Dtile.cu -o CMakeFiles/gemm4_2DBlockTile.dir/gemm_4_block2Dtile.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm_4_block2Dtile.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm_cublas_v1.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm_cublas_v1.dir/MY_MUL_cublas_v1.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/MY_MUL_cublas_v1.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/MY_MUL_cublas_v1.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm_cublas_v2.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm_cublas_v2.dir/MY_MUL_cublas_v2.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/MY_MUL_cublas_v2.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/MY_MUL_cublas_v2.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/reduce_nvidia",
+  "command": "/usr/bin/g++  -I/home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce_nvidia/../utils -isystem /usr/local/cuda/include -g -o CMakeFiles/reduce_nvidia.dir/reduction.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce_nvidia/reduction.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce_nvidia/reduction.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/reduce_nvidia",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -I/home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce_nvidia/../utils -isystem=/usr/local/cuda/include -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce_nvidia/reduction_kernel.cu -o CMakeFiles/reduce_nvidia.dir/reduction_kernel.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce_nvidia/reduction_kernel.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/wmma",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/wmma/wmma.cu -o CMakeFiles/wmma.dir/wmma.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/wmma/wmma.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/float4",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler   -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/float4/float4.cu -o CMakeFiles/float_4.dir/float4.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/float4/float4.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/flashAtten",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/FA_CPU.dir/FA.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/flashAtten/FA.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/flashAtten/FA.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/flashAtten",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler   -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/flashAtten/flashAtten.cu -o CMakeFiles/FA_GPU.dir/flashAtten.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/flashAtten/flashAtten.cu"
+}
+]

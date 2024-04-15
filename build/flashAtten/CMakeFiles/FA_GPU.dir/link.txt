@@ -1,0 +1,1 @@
+/usr/bin/g++ CMakeFiles/FA_GPU.dir/flashAtten.cu.o -o FA_GPU  -lcudadevrt -lcudart_static -lrt -lpthread -ldl  -L"/usr/local/cuda/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda/targets/x86_64-linux/lib"
