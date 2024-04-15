@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/gemm3.dir/main.cpp.o CMakeFiles/gemm3.dir/gemm_3.cu.o -o gemm3   -L/usr/local/cuda/targets/x86_64-linux/lib/stubs  -L/usr/local/cuda/targets/x86_64-linux/lib  -Wl,-rpath,/usr/local/cuda/lib64 /usr/local/cuda/lib64/libcublas.so /usr/local/cuda/lib64/libcudart.so -lcudadevrt -lcudart_static -lrt -lpthread -ldl 

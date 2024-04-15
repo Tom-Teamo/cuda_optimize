@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/FA.dir/FA.cpp.o -o FA 
