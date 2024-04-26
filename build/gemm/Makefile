@@ -187,6 +187,48 @@ gemm4_2DBlockTile/fast:
 .PHONY : gemm4_2DBlockTile/fast
 
 # Convenience name for target.
+gemm/CMakeFiles/gemm5_float4.dir/rule:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/gemm5_float4.dir/rule
+.PHONY : gemm/CMakeFiles/gemm5_float4.dir/rule
+
+# Convenience name for target.
+gemm5_float4: gemm/CMakeFiles/gemm5_float4.dir/rule
+.PHONY : gemm5_float4
+
+# fast build rule for target.
+gemm5_float4/fast:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/build
+.PHONY : gemm5_float4/fast
+
+# Convenience name for target.
+gemm/CMakeFiles/gemm6_double_buffer.dir/rule:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/gemm6_double_buffer.dir/rule
+.PHONY : gemm/CMakeFiles/gemm6_double_buffer.dir/rule
+
+# Convenience name for target.
+gemm6_double_buffer: gemm/CMakeFiles/gemm6_double_buffer.dir/rule
+.PHONY : gemm6_double_buffer
+
+# fast build rule for target.
+gemm6_double_buffer/fast:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/build
+.PHONY : gemm6_double_buffer/fast
+
+# Convenience name for target.
+gemm/CMakeFiles/no_bank_conflict.dir/rule:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/no_bank_conflict.dir/rule
+.PHONY : gemm/CMakeFiles/no_bank_conflict.dir/rule
+
+# Convenience name for target.
+no_bank_conflict: gemm/CMakeFiles/no_bank_conflict.dir/rule
+.PHONY : no_bank_conflict
+
+# fast build rule for target.
+no_bank_conflict/fast:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/build
+.PHONY : no_bank_conflict/fast
+
+# Convenience name for target.
 gemm/CMakeFiles/gemm_cublas_v1.dir/rule:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/gemm_cublas_v1.dir/rule
 .PHONY : gemm/CMakeFiles/gemm_cublas_v1.dir/rule
@@ -261,6 +303,54 @@ MY_MUL_cublas_v2.s: MY_MUL_cublas_v2.cpp.s
 MY_MUL_cublas_v2.cpp.s:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/MY_MUL_cublas_v2.cpp.s
 .PHONY : MY_MUL_cublas_v2.cpp.s
+
+gemm6_double_buffer.o: gemm6_double_buffer.cu.o
+.PHONY : gemm6_double_buffer.o
+
+# target to build an object file
+gemm6_double_buffer.cu.o:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/gemm6_double_buffer.cu.o
+.PHONY : gemm6_double_buffer.cu.o
+
+gemm6_double_buffer.i: gemm6_double_buffer.cu.i
+.PHONY : gemm6_double_buffer.i
+
+# target to preprocess a source file
+gemm6_double_buffer.cu.i:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/gemm6_double_buffer.cu.i
+.PHONY : gemm6_double_buffer.cu.i
+
+gemm6_double_buffer.s: gemm6_double_buffer.cu.s
+.PHONY : gemm6_double_buffer.s
+
+# target to generate assembly for a file
+gemm6_double_buffer.cu.s:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/gemm6_double_buffer.cu.s
+.PHONY : gemm6_double_buffer.cu.s
+
+gemm7_no_bankConf.o: gemm7_no_bankConf.cu.o
+.PHONY : gemm7_no_bankConf.o
+
+# target to build an object file
+gemm7_no_bankConf.cu.o:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/gemm7_no_bankConf.cu.o
+.PHONY : gemm7_no_bankConf.cu.o
+
+gemm7_no_bankConf.i: gemm7_no_bankConf.cu.i
+.PHONY : gemm7_no_bankConf.i
+
+# target to preprocess a source file
+gemm7_no_bankConf.cu.i:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/gemm7_no_bankConf.cu.i
+.PHONY : gemm7_no_bankConf.cu.i
+
+gemm7_no_bankConf.s: gemm7_no_bankConf.cu.s
+.PHONY : gemm7_no_bankConf.s
+
+# target to generate assembly for a file
+gemm7_no_bankConf.cu.s:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/gemm7_no_bankConf.cu.s
+.PHONY : gemm7_no_bankConf.cu.s
 
 gemm_2.o: gemm_2.cu.o
 .PHONY : gemm_2.o
@@ -382,6 +472,30 @@ gemm_4_block2Dtile.cu.s:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_2DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_2DBlockTile.dir/gemm_4_block2Dtile.cu.s
 .PHONY : gemm_4_block2Dtile.cu.s
 
+gemm_5_float4.o: gemm_5_float4.cu.o
+.PHONY : gemm_5_float4.o
+
+# target to build an object file
+gemm_5_float4.cu.o:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/gemm_5_float4.cu.o
+.PHONY : gemm_5_float4.cu.o
+
+gemm_5_float4.i: gemm_5_float4.cu.i
+.PHONY : gemm_5_float4.i
+
+# target to preprocess a source file
+gemm_5_float4.cu.i:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/gemm_5_float4.cu.i
+.PHONY : gemm_5_float4.cu.i
+
+gemm_5_float4.s: gemm_5_float4.cu.s
+.PHONY : gemm_5_float4.s
+
+# target to generate assembly for a file
+gemm_5_float4.cu.s:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/gemm_5_float4.cu.s
+.PHONY : gemm_5_float4.cu.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -392,6 +506,9 @@ main.cpp.o:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4.dir/build.make gemm/CMakeFiles/gemm4.dir/main.cpp.o
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_1DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_1DBlockTile.dir/main.cpp.o
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_2DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_2DBlockTile.dir/main.cpp.o
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/main.cpp.o
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/main.cpp.o
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/main.cpp.o
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v1.dir/build.make gemm/CMakeFiles/gemm_cublas_v1.dir/main.cpp.o
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/main.cpp.o
 .PHONY : main.cpp.o
@@ -406,6 +523,9 @@ main.cpp.i:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4.dir/build.make gemm/CMakeFiles/gemm4.dir/main.cpp.i
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_1DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_1DBlockTile.dir/main.cpp.i
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_2DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_2DBlockTile.dir/main.cpp.i
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/main.cpp.i
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/main.cpp.i
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/main.cpp.i
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v1.dir/build.make gemm/CMakeFiles/gemm_cublas_v1.dir/main.cpp.i
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/main.cpp.i
 .PHONY : main.cpp.i
@@ -420,6 +540,9 @@ main.cpp.s:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4.dir/build.make gemm/CMakeFiles/gemm4.dir/main.cpp.s
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_1DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_1DBlockTile.dir/main.cpp.s
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_2DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_2DBlockTile.dir/main.cpp.s
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/main.cpp.s
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/main.cpp.s
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/main.cpp.s
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v1.dir/build.make gemm/CMakeFiles/gemm_cublas_v1.dir/main.cpp.s
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/main.cpp.s
 .PHONY : main.cpp.s
@@ -437,14 +560,23 @@ help:
 	@echo "... gemm4"
 	@echo "... gemm4_1DBlockTile"
 	@echo "... gemm4_2DBlockTile"
+	@echo "... gemm5_float4"
+	@echo "... gemm6_double_buffer"
 	@echo "... gemm_cublas_v1"
 	@echo "... gemm_cublas_v2"
+	@echo "... no_bank_conflict"
 	@echo "... MY_MUL_cublas_v1.o"
 	@echo "... MY_MUL_cublas_v1.i"
 	@echo "... MY_MUL_cublas_v1.s"
 	@echo "... MY_MUL_cublas_v2.o"
 	@echo "... MY_MUL_cublas_v2.i"
 	@echo "... MY_MUL_cublas_v2.s"
+	@echo "... gemm6_double_buffer.o"
+	@echo "... gemm6_double_buffer.i"
+	@echo "... gemm6_double_buffer.s"
+	@echo "... gemm7_no_bankConf.o"
+	@echo "... gemm7_no_bankConf.i"
+	@echo "... gemm7_no_bankConf.s"
 	@echo "... gemm_2.o"
 	@echo "... gemm_2.i"
 	@echo "... gemm_2.s"
@@ -460,6 +592,9 @@ help:
 	@echo "... gemm_4_block2Dtile.o"
 	@echo "... gemm_4_block2Dtile.i"
 	@echo "... gemm_4_block2Dtile.s"
+	@echo "... gemm_5_float4.o"
+	@echo "... gemm_5_float4.i"
+	@echo "... gemm_5_float4.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

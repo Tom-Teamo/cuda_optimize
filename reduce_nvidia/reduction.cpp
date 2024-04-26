@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
   char *typeInput = 0;
   getCmdLineArgumentString(argc, (const char **)argv, "type", &typeInput);
 
-  ReduceType datatype = REDUCE_INT;
+  ReduceType datatype = REDUCE_FLOAT;
 
   if (0 != typeInput) {
     if (!strcasecmp(typeInput, "float")) {
@@ -420,9 +420,9 @@ void shmoo(int minN, int maxN, int maxThreads, int maxBlocks,
 ////////////////////////////////////////////////////////////////////////////////
 template <class T>
 bool runTest(int argc, char **argv, ReduceType datatype) {
-  int size = 1 << 24;    // number of elements to reduce
+  int size = 1 << 25;    // number of elements to reduce
   int maxThreads = 256;  // number of threads per block
-  int whichKernel = 4;
+  int whichKernel = 7;
   int maxBlocks = 64;
   bool cpuFinalReduction = false;
   int cpuFinalThreshold = 1;

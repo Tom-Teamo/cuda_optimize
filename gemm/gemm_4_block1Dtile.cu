@@ -111,6 +111,7 @@ __global__ void tile_1d_kernel(int M, int N, int K, float alpha, float *A, float
     __shared__ float Bs[BK][BN];
     float val[TM] = {0.};
     int num_shared_block = CEIL_DIV(K, BK); // or CEIL_DIV(K, BN);
+    // 而&运算符被用来获取该区域的地址
     A = &A[OFFSET(blockIdx.y * BM, 0, K)];
     B = &B[OFFSET(0, blockIdx.x * BN, N)];
     C = &C[OFFSET(blockIdx.y * BM, blockIdx.x * BN, N)];
@@ -137,7 +138,7 @@ __global__ void tile_1d_kernel(int M, int N, int K, float alpha, float *A, float
         A += BK;
         B += BK * N;
         for (int k = 0; k < BK; ++k) {
-            for (int m = 0; m < TM; ++m) {
+            for (int m = 0; m < TM; ++m) { 
                 int A_row = threadIdx.y * TM + m;
                 int B_col = threadIdx.x;
                 val[m] += As[A_row][k] * Bs[k][B_col];

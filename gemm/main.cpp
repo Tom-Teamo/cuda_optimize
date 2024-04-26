@@ -11,6 +11,7 @@ void MY_MMult(cublasHandle_t, int, int, int, float *, int, float *, int,
               float *, int);
 
 int main() {
+
     // print gpu info
     cudaDeviceProp device_prop;
     int device_id = 0;
@@ -86,6 +87,7 @@ int main() {
 
         // compute and print the performance
         float msec_per_mmtul = msec_total / NREPEATS;
+        // A * B 一共需要m * n * k次乘加运算
         double flops_per_mmul = 2.0 * m * n * k;
         double gflops = (flops_per_mmul * 1.0e-9f) / (msec_per_mmtul / 1000.0f);
 
@@ -119,3 +121,6 @@ int main() {
     printf("];\n");
     return 0;
 }
+
+
+

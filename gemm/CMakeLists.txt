@@ -29,6 +29,15 @@ target_link_libraries(gemm4_1DBlockTile PRIVATE CUDA::cublas CUDA::cudart)
 add_executable(gemm4_2DBlockTile main.cpp gemm_4_block2Dtile.cu)
 target_link_libraries(gemm4_2DBlockTile PRIVATE CUDA::cublas CUDA::cudart)
 
+add_executable(gemm5_float4 main.cpp gemm_5_float4.cu)
+target_link_libraries(gemm5_float4 PRIVATE CUDA::cublas CUDA::cudart)
+
+add_executable(gemm6_double_buffer main.cpp gemm6_double_buffer.cu)
+target_link_libraries(gemm6_double_buffer PRIVATE CUDA::cublas CUDA::cudart)
+
+add_executable(no_bank_conflict main.cpp gemm7_no_bankConf.cu)
+target_link_libraries(no_bank_conflict PRIVATE CUDA::cublas CUDA::cudart)
+
 add_executable(gemm_cublas_v1 main.cpp MY_MUL_cublas_v1.cpp)
 target_link_libraries(gemm_cublas_v1 PRIVATE CUDA::cublas CUDA::cudart)
 

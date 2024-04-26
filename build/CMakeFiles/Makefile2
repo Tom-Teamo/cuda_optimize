@@ -130,6 +130,9 @@ gemm/all: gemm/CMakeFiles/gemm3.dir/all
 gemm/all: gemm/CMakeFiles/gemm4.dir/all
 gemm/all: gemm/CMakeFiles/gemm4_1DBlockTile.dir/all
 gemm/all: gemm/CMakeFiles/gemm4_2DBlockTile.dir/all
+gemm/all: gemm/CMakeFiles/gemm5_float4.dir/all
+gemm/all: gemm/CMakeFiles/gemm6_double_buffer.dir/all
+gemm/all: gemm/CMakeFiles/no_bank_conflict.dir/all
 gemm/all: gemm/CMakeFiles/gemm_cublas_v1.dir/all
 gemm/all: gemm/CMakeFiles/gemm_cublas_v2.dir/all
 .PHONY : gemm/all
@@ -144,6 +147,9 @@ gemm/clean: gemm/CMakeFiles/gemm3.dir/clean
 gemm/clean: gemm/CMakeFiles/gemm4.dir/clean
 gemm/clean: gemm/CMakeFiles/gemm4_1DBlockTile.dir/clean
 gemm/clean: gemm/CMakeFiles/gemm4_2DBlockTile.dir/clean
+gemm/clean: gemm/CMakeFiles/gemm5_float4.dir/clean
+gemm/clean: gemm/CMakeFiles/gemm6_double_buffer.dir/clean
+gemm/clean: gemm/CMakeFiles/no_bank_conflict.dir/clean
 gemm/clean: gemm/CMakeFiles/gemm_cublas_v1.dir/clean
 gemm/clean: gemm/CMakeFiles/gemm_cublas_v2.dir/clean
 .PHONY : gemm/clean
@@ -200,7 +206,7 @@ wmma/clean: wmma/CMakeFiles/wmma.dir/clean
 reduce/CMakeFiles/reduce.dir/all:
 	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/reduce.dir/build.make reduce/CMakeFiles/reduce.dir/depend
 	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/reduce.dir/build.make reduce/CMakeFiles/reduce.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=28,29 "Built target reduce"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=37,38 "Built target reduce"
 .PHONY : reduce/CMakeFiles/reduce.dir/all
 
 # Build rule for subdir invocation for target.
@@ -350,13 +356,91 @@ gemm/CMakeFiles/gemm4_2DBlockTile.dir/clean:
 .PHONY : gemm/CMakeFiles/gemm4_2DBlockTile.dir/clean
 
 #=============================================================================
+# Target rules for target gemm/CMakeFiles/gemm5_float4.dir
+
+# All Build rule for target.
+gemm/CMakeFiles/gemm5_float4.dir/all:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/depend
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=22,23,24 "Built target gemm5_float4"
+.PHONY : gemm/CMakeFiles/gemm5_float4.dir/all
+
+# Build rule for subdir invocation for target.
+gemm/CMakeFiles/gemm5_float4.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/gemm5_float4.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles 0
+.PHONY : gemm/CMakeFiles/gemm5_float4.dir/rule
+
+# Convenience name for target.
+gemm5_float4: gemm/CMakeFiles/gemm5_float4.dir/rule
+.PHONY : gemm5_float4
+
+# clean rule for target.
+gemm/CMakeFiles/gemm5_float4.dir/clean:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/clean
+.PHONY : gemm/CMakeFiles/gemm5_float4.dir/clean
+
+#=============================================================================
+# Target rules for target gemm/CMakeFiles/gemm6_double_buffer.dir
+
+# All Build rule for target.
+gemm/CMakeFiles/gemm6_double_buffer.dir/all:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/depend
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=25,26,27 "Built target gemm6_double_buffer"
+.PHONY : gemm/CMakeFiles/gemm6_double_buffer.dir/all
+
+# Build rule for subdir invocation for target.
+gemm/CMakeFiles/gemm6_double_buffer.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/gemm6_double_buffer.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles 0
+.PHONY : gemm/CMakeFiles/gemm6_double_buffer.dir/rule
+
+# Convenience name for target.
+gemm6_double_buffer: gemm/CMakeFiles/gemm6_double_buffer.dir/rule
+.PHONY : gemm6_double_buffer
+
+# clean rule for target.
+gemm/CMakeFiles/gemm6_double_buffer.dir/clean:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/clean
+.PHONY : gemm/CMakeFiles/gemm6_double_buffer.dir/clean
+
+#=============================================================================
+# Target rules for target gemm/CMakeFiles/no_bank_conflict.dir
+
+# All Build rule for target.
+gemm/CMakeFiles/no_bank_conflict.dir/all:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/depend
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=34,35,36 "Built target no_bank_conflict"
+.PHONY : gemm/CMakeFiles/no_bank_conflict.dir/all
+
+# Build rule for subdir invocation for target.
+gemm/CMakeFiles/no_bank_conflict.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/no_bank_conflict.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles 0
+.PHONY : gemm/CMakeFiles/no_bank_conflict.dir/rule
+
+# Convenience name for target.
+no_bank_conflict: gemm/CMakeFiles/no_bank_conflict.dir/rule
+.PHONY : no_bank_conflict
+
+# clean rule for target.
+gemm/CMakeFiles/no_bank_conflict.dir/clean:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/clean
+.PHONY : gemm/CMakeFiles/no_bank_conflict.dir/clean
+
+#=============================================================================
 # Target rules for target gemm/CMakeFiles/gemm_cublas_v1.dir
 
 # All Build rule for target.
 gemm/CMakeFiles/gemm_cublas_v1.dir/all:
 	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v1.dir/build.make gemm/CMakeFiles/gemm_cublas_v1.dir/depend
 	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v1.dir/build.make gemm/CMakeFiles/gemm_cublas_v1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=22,23,24 "Built target gemm_cublas_v1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=28,29,30 "Built target gemm_cublas_v1"
 .PHONY : gemm/CMakeFiles/gemm_cublas_v1.dir/all
 
 # Build rule for subdir invocation for target.
@@ -382,7 +466,7 @@ gemm/CMakeFiles/gemm_cublas_v1.dir/clean:
 gemm/CMakeFiles/gemm_cublas_v2.dir/all:
 	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/depend
 	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=25,26,27 "Built target gemm_cublas_v2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=31,32,33 "Built target gemm_cublas_v2"
 .PHONY : gemm/CMakeFiles/gemm_cublas_v2.dir/all
 
 # Build rule for subdir invocation for target.
@@ -408,7 +492,7 @@ gemm/CMakeFiles/gemm_cublas_v2.dir/clean:
 reduce_nvidia/CMakeFiles/reduce_nvidia.dir/all:
 	$(MAKE) $(MAKESILENT) -f reduce_nvidia/CMakeFiles/reduce_nvidia.dir/build.make reduce_nvidia/CMakeFiles/reduce_nvidia.dir/depend
 	$(MAKE) $(MAKESILENT) -f reduce_nvidia/CMakeFiles/reduce_nvidia.dir/build.make reduce_nvidia/CMakeFiles/reduce_nvidia.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=30,31,32 "Built target reduce_nvidia"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=39,40,41 "Built target reduce_nvidia"
 .PHONY : reduce_nvidia/CMakeFiles/reduce_nvidia.dir/all
 
 # Build rule for subdir invocation for target.
@@ -434,7 +518,7 @@ reduce_nvidia/CMakeFiles/reduce_nvidia.dir/clean:
 wmma/CMakeFiles/wmma.dir/all:
 	$(MAKE) $(MAKESILENT) -f wmma/CMakeFiles/wmma.dir/build.make wmma/CMakeFiles/wmma.dir/depend
 	$(MAKE) $(MAKESILENT) -f wmma/CMakeFiles/wmma.dir/build.make wmma/CMakeFiles/wmma.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=33,34 "Built target wmma"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/CMakeFiles --progress-num=42,43 "Built target wmma"
 .PHONY : wmma/CMakeFiles/wmma.dir/all
 
 # Build rule for subdir invocation for target.

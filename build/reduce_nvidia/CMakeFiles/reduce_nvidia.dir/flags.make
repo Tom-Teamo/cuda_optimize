@@ -7,7 +7,7 @@ CUDA_DEFINES =
 
 CUDA_INCLUDES = -I/home/cwwu/Desktop/Cuda/cuda_code/my_samples/reduce_nvidia/../utils -isystem=/usr/local/cuda/include
 
-CUDA_FLAGS = -g -G -g --generate-code=arch=compute_86,code=[compute_86,sm_86]
+CUDA_FLAGS = -g --generate-code=arch=compute_86,code=[compute_86,sm_86]
 
 CXX_DEFINES = 
 

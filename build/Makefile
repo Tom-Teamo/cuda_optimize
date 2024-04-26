@@ -195,6 +195,45 @@ gemm4_2DBlockTile/fast:
 .PHONY : gemm4_2DBlockTile/fast
 
 #=============================================================================
+# Target rules for targets named gemm5_float4
+
+# Build rule for target.
+gemm5_float4: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm5_float4
+.PHONY : gemm5_float4
+
+# fast build rule for target.
+gemm5_float4/fast:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/build
+.PHONY : gemm5_float4/fast
+
+#=============================================================================
+# Target rules for targets named gemm6_double_buffer
+
+# Build rule for target.
+gemm6_double_buffer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm6_double_buffer
+.PHONY : gemm6_double_buffer
+
+# fast build rule for target.
+gemm6_double_buffer/fast:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/build
+.PHONY : gemm6_double_buffer/fast
+
+#=============================================================================
+# Target rules for targets named no_bank_conflict
+
+# Build rule for target.
+no_bank_conflict: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 no_bank_conflict
+.PHONY : no_bank_conflict
+
+# fast build rule for target.
+no_bank_conflict/fast:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/build
+.PHONY : no_bank_conflict/fast
+
+#=============================================================================
 # Target rules for targets named gemm_cublas_v1
 
 # Build rule for target.
@@ -301,8 +340,11 @@ help:
 	@echo "... gemm4"
 	@echo "... gemm4_1DBlockTile"
 	@echo "... gemm4_2DBlockTile"
+	@echo "... gemm5_float4"
+	@echo "... gemm6_double_buffer"
 	@echo "... gemm_cublas_v1"
 	@echo "... gemm_cublas_v2"
+	@echo "... no_bank_conflict"
 	@echo "... reduce"
 	@echo "... reduce_nvidia"
 	@echo "... wmma"

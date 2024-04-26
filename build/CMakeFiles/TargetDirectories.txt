@@ -8,6 +8,9 @@
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm4.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm4_1DBlockTile.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm4_2DBlockTile.dir
+/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm5_float4.dir
+/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm6_double_buffer.dir
+/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/no_bank_conflict.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm_cublas_v1.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm_cublas_v2.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/edit_cache.dir

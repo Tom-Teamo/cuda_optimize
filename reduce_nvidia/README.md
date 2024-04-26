@@ -1,0 +1,1 @@
+This implementation is from [nvidia sample](https://github.com/NVIDIA/cuda-samples/tree/master/Samples/2_Concepts_and_Techniques/reduction). **I just use Cmake to rebuild the project**.

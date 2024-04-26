@@ -7,7 +7,7 @@ if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
 endif()
 
 project(cuda_my_samples LANGUAGES CUDA CXX)
-set(CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS} "-g -G")  # enable cuda-gdb
+# set(CMAKE_CUDA_FLAGS ${CMAKE_CUDA_FLAGS} "-g -G")  # enable cuda-gdb
 
 # cuda include files
 # 一旦 find_package 找到了软件包并成功配置，就可以使用相应的变量

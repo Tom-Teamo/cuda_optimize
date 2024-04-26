@@ -5,7 +5,11 @@
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
 
-// CUDA and CUBLAS functions
+/*
+This function is an extension of cublas<t>gemm that 
+    allows the user to individually specify the data types for each of the A, B and C matrices,
+    the precision of computation and the GEMM algorithm to be run.
+*/
 
 void MY_MMult(cublasHandle_t handle, int m, int n, int k, float *d_A, int lda,
               float *d_B, int ldb, float *d_C, int ldc) {
