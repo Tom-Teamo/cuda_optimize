@@ -10,7 +10,8 @@
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm4_2DBlockTile.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm5_float4.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm6_double_buffer.dir
-/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/no_bank_conflict.dir
+/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm7_no_bankConf.dir
+/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm7_no_BC_z_order.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm_cublas_v1.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/gemm_cublas_v2.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm/CMakeFiles/edit_cache.dir
@@ -28,3 +29,6 @@
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/flashAtten/CMakeFiles/FA_GPU.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/flashAtten/CMakeFiles/edit_cache.dir
 /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/flashAtten/CMakeFiles/rebuild_cache.dir
+/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/bank_conflict/CMakeFiles/bank_conflict_test.dir
+/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/bank_conflict/CMakeFiles/edit_cache.dir
+/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/bank_conflict/CMakeFiles/rebuild_cache.dir

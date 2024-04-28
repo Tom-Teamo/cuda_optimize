@@ -30,74 +30,7 @@
     现在，需要计算C矩阵中的Bc:[BLOCK, BLOCK]大小的数据
         我们让每个线程读取[BLOCK, 1]大小的数据
         每个线程同样计算 [BLOCK, 1]大小的Bc的数据（下列代码每个线程计算Bc中的一列）
-
-    TODO:
-        将各个参数写成变量！
 */
-
-// template <int BM, int BN, int BK, int TM>
-// __global__ void sgemm(int m, int n, int k, float *a, float *b, float *c) {
-
-//     int tx = threadIdx.x;
-//     int bx = blockIdx.x;
-//     int by = blockIdx.y;
-
-//     float *a_begin = a + by * BM * k;
-//     float *b_begin = b + bx * BN;
-//     float *a_end = a_begin + k;
-
-//     // each thread computes the [TM] elements in C
-//     float sum[TM] = {0.f};
-
-//     __shared__ float a_smem[BM][BK];
-//     __shared__ float b_smem[BK][BN];
-
-//     for (float *a_ptr = a_begin, *b_ptr = b_begin; a_ptr < a_end;
-//             a_ptr += BK, b_ptr += BK * n) {
-
-//         // warp内的线程天然同步，因此tx写在后面更不容易发生bank conflict
-//         for (int i = 0; i < BM; ++i) {
-//             a_smem[i][tx] = a_ptr[i * k + tx];
-//         }
-
-//         for (int i = 0; i < BN; ++i) {
-//             b_smem[tx][i] = b_ptr[tx * n + i];
-//         }
-        
-//         __syncthreads();
-
-//         for (int i = 0; i < BM; i++) {
-//             // 下面是计算第i行 第tx列的结果
-//             for (int j = 0; j < BN; j++) {
-//                 sum[i] += a_smem[i][j] * b_smem[j][tx];
-//             }
-//         }
-//         __syncthreads();
-//     }
-
-//     for (int i = 0; i < BM; i++){
-//         c[(by * BM + i) * n + bx * BM + tx] = sum[i];
-//     }
-    
-// }
-
-
-// void MY_MMult(cublasHandle_t handle, int m, int n, int k, float *d_A, int lda,
-//               float *d_B, int ldb, float *d_C, int ldc) {
-//     // 现在是什么情况呢
-//     // m n k 是要 整除 bm bk 
-//     const int BM = 32;
-//     const int BN = 32;
-//     const int BK = 32;
-
-//     // assume that BM % TM == 0
-//     const int TM = 32;
-
-//     dim3 block(BM, 1);
-//     //assume that m % BM == 0
-//     dim3 grid(m / BM , n / BN );
-//     sgemm<BM, BN, BK, TM><<<grid, block>>>(m, n, k, d_A, d_B, d_C);
-// }
 
 
 #define OFFSET(row, col, stride) ((row) * (stride) + (col))

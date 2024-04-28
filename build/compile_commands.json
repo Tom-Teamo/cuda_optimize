@@ -76,13 +76,23 @@
 },
 {
   "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
-  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/no_bank_conflict.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm7_no_bankConf.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
   "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
 },
 {
   "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
-  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm7_no_bankConf.cu -o CMakeFiles/no_bank_conflict.dir/gemm7_no_bankConf.cu.o",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm7_no_bankConf.cu -o CMakeFiles/gemm7_no_bankConf.dir/gemm7_no_bankConf.cu.o",
   "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm7_no_bankConf.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/bin/g++  -isystem /usr/local/cuda/include -g -o CMakeFiles/gemm7_no_BC_z_order.dir/main.cpp.o -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/main.cpp"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -isystem=/usr/local/cuda/include -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm7_no_BC_z_order.cu -o CMakeFiles/gemm7_no_BC_z_order.dir/gemm7_no_BC_z_order.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/gemm/gemm7_no_BC_z_order.cu"
 },
 {
   "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/gemm",
@@ -133,5 +143,10 @@
   "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/flashAtten",
   "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler   -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/flashAtten/flashAtten.cu -o CMakeFiles/FA_GPU.dir/flashAtten.cu.o",
   "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/flashAtten/flashAtten.cu"
+},
+{
+  "directory": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/bank_conflict",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler   -g --generate-code=arch=compute_86,code=[compute_86,sm_86] -x cu -c /home/cwwu/Desktop/Cuda/cuda_code/my_samples/bank_conflict/test.cu -o CMakeFiles/bank_conflict_test.dir/test.cu.o",
+  "file": "/home/cwwu/Desktop/Cuda/cuda_code/my_samples/bank_conflict/test.cu"
 }
 ]

@@ -21,7 +21,6 @@ Note
     从全局内存加载到shared mem，是需要两次迭代的，因为一个线程需要负责STRIDE * STRIDE的数据加载，
     比如STRIDE=2 那么每个thread需要负责4个数据的加载
 
-    
 */
 
 

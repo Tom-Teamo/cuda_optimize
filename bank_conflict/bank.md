@@ -11,7 +11,7 @@
 * 当多个thread访问同一个bank内的同一个word，就会触发broadcast机制，这个word会同时发给对应的thread
 * 当多个thread访问同一个bank内的不同的word，就会产生conflict。于是请求会被拆分成多次memory transaction，串行地被发射(issue)出去执行（比如2-way conflict就是指会被当做两次memory transaction发射）
 
-![alt text](image.png)
+![alt text](./images/image.png)
 
 总结：**单次请求中，warp 内 32 个 thread，每个访问 4 bytes，那么总的数据需求就是最多 128 bytes。只要不产生 bank conflict，一次 memory transaction 就够了。取回来 128 bytes 的数据，warp 内怎么分都可以**
 
@@ -37,7 +37,7 @@
 比如这里，第一次访问了 0 - 31 个 word，第二次访问了 32 - 63 个 word，每次 transaction 内部并没有 bank conflict。
 
 ### case 2
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 
 这个模式就是符合了合并条件中的第一条,所以两个 half warp 的访问合并，一共只有 1 次 memory transaction，没有 bank conflict
 
@@ -53,20 +53,20 @@
 * 对于 Warp 内所有活跃的第 i 号线程，第 i xor 2 号线程不活跃或者访存地址和其一致；(i.e. T0==T2, T1==T3, T4==T6, T5==T7 etc.)
 
 ### case 1
-![alt text](image-2.png)
+![alt text](./images/image-2.png)
 ### case 2
-![alt text](image-3.png)
+![alt text](./images/image-3.png)
 
 ### case 3
-![alt text](image-4.png)
+![alt text](./images/image-4.png)
 
 ### case 4
 
-![alt text](image-5.png)
+![alt text](./images/image-5.png)
 这个排布有点意思，第一个 half warp 满足合并条件 1，第二个half warp 满足合并条件 2。但是**需要整个 warp 都满足条件 1，或者条件2**，或者 1、2 同时满足，这样才可以合并。
 
 ### case 5
-![alt text](image-6.png)
+![alt text](./images/image-6.png)
 
 thread 0 - 3 访问第 0 个 uint4， thread 4 - 7 访问第 8 个 uint4（到了第二行）；
 
@@ -77,6 +77,15 @@ thread 8 - 11 访问第 1 个 uint4， thread 12 - 15 访问第 9 个 uint4（�
 即一共 2 个 bank conflict， 4 次 transaction。
 
 
+## ncu 测试 bank conflict
+```
+ncu --metrics shared_op_ld exe_name
+```
+
+多个metrics：
+```
+ncu --metrics shared_op_ld,shared_op_st  bank_conflict_test
+```
 ## reference
 > https://code.hitori.moe/post/cuda-shared-memory-access-mechanism-with-vectorized-instructions/
 

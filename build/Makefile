@@ -221,17 +221,30 @@ gemm6_double_buffer/fast:
 .PHONY : gemm6_double_buffer/fast
 
 #=============================================================================
-# Target rules for targets named no_bank_conflict
+# Target rules for targets named gemm7_no_bankConf
 
 # Build rule for target.
-no_bank_conflict: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 no_bank_conflict
-.PHONY : no_bank_conflict
+gemm7_no_bankConf: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm7_no_bankConf
+.PHONY : gemm7_no_bankConf
 
 # fast build rule for target.
-no_bank_conflict/fast:
-	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/build
-.PHONY : no_bank_conflict/fast
+gemm7_no_bankConf/fast:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_bankConf.dir/build.make gemm/CMakeFiles/gemm7_no_bankConf.dir/build
+.PHONY : gemm7_no_bankConf/fast
+
+#=============================================================================
+# Target rules for targets named gemm7_no_BC_z_order
+
+# Build rule for target.
+gemm7_no_BC_z_order: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm7_no_BC_z_order
+.PHONY : gemm7_no_BC_z_order
+
+# fast build rule for target.
+gemm7_no_BC_z_order/fast:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build.make gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build
+.PHONY : gemm7_no_BC_z_order/fast
 
 #=============================================================================
 # Target rules for targets named gemm_cublas_v1
@@ -324,6 +337,19 @@ FA_GPU/fast:
 	$(MAKE) $(MAKESILENT) -f flashAtten/CMakeFiles/FA_GPU.dir/build.make flashAtten/CMakeFiles/FA_GPU.dir/build
 .PHONY : FA_GPU/fast
 
+#=============================================================================
+# Target rules for targets named bank_conflict_test
+
+# Build rule for target.
+bank_conflict_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 bank_conflict_test
+.PHONY : bank_conflict_test
+
+# fast build rule for target.
+bank_conflict_test/fast:
+	$(MAKE) $(MAKESILENT) -f bank_conflict/CMakeFiles/bank_conflict_test.dir/build.make bank_conflict/CMakeFiles/bank_conflict_test.dir/build
+.PHONY : bank_conflict_test/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -334,6 +360,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... FA_CPU"
 	@echo "... FA_GPU"
+	@echo "... bank_conflict_test"
 	@echo "... float_4"
 	@echo "... gemm2"
 	@echo "... gemm3"
@@ -342,9 +369,10 @@ help:
 	@echo "... gemm4_2DBlockTile"
 	@echo "... gemm5_float4"
 	@echo "... gemm6_double_buffer"
+	@echo "... gemm7_no_BC_z_order"
+	@echo "... gemm7_no_bankConf"
 	@echo "... gemm_cublas_v1"
 	@echo "... gemm_cublas_v2"
-	@echo "... no_bank_conflict"
 	@echo "... reduce"
 	@echo "... reduce_nvidia"
 	@echo "... wmma"

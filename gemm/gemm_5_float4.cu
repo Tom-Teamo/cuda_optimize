@@ -9,11 +9,10 @@
     可以通过nsight compute看到，当前2D-tile还是stall在了memory，花在了访存等待上。
     我们可以进一步使用float4指令进一步优化程序的访存，让每个元素一次性读取4个浮点数，减少对内存的竞争。
 
-    需要注意，因为使用了 FLOAT4 访存的缘故，矩阵的元素数量必须是 4 的倍数，不再能够支持任意大小的矩阵
-    （实际上，还是可以支持的，但是边界条件需要更加细致的判断，对性能有所影响）
-
     同时，我们在读取矩阵 $A$ 的内容时，还要对其进行转置，然后再存储到 shared memory 中，
     以方便后续线程计算时使用  float4  读取，以避免共享内存的 bank conflict。
+
+    其实代码中的load_a_time可以消除掉，TM TN都是自己确定的，完全可以block中的所有线程一次性完成load
 */
 
 #define OFFSET(row, col, stride) ((row) * (stride) + (col))

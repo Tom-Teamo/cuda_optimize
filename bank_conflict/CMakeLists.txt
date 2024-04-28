@@ -1,0 +1,1 @@
+add_executable(bank_conflict_test test.cu)

@@ -72,6 +72,11 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/flashAtten/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/cwwu/Desktop/Cuda/cuda_code/my_samples/build/bank_conflict/cmake_install.cmake")
+endif()
+
 if(CMAKE_INSTALL_COMPONENT)
   set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 else()

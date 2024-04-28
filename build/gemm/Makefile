@@ -215,18 +215,32 @@ gemm6_double_buffer/fast:
 .PHONY : gemm6_double_buffer/fast
 
 # Convenience name for target.
-gemm/CMakeFiles/no_bank_conflict.dir/rule:
-	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/no_bank_conflict.dir/rule
-.PHONY : gemm/CMakeFiles/no_bank_conflict.dir/rule
+gemm/CMakeFiles/gemm7_no_bankConf.dir/rule:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/gemm7_no_bankConf.dir/rule
+.PHONY : gemm/CMakeFiles/gemm7_no_bankConf.dir/rule
 
 # Convenience name for target.
-no_bank_conflict: gemm/CMakeFiles/no_bank_conflict.dir/rule
-.PHONY : no_bank_conflict
+gemm7_no_bankConf: gemm/CMakeFiles/gemm7_no_bankConf.dir/rule
+.PHONY : gemm7_no_bankConf
 
 # fast build rule for target.
-no_bank_conflict/fast:
-	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/build
-.PHONY : no_bank_conflict/fast
+gemm7_no_bankConf/fast:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_bankConf.dir/build.make gemm/CMakeFiles/gemm7_no_bankConf.dir/build
+.PHONY : gemm7_no_bankConf/fast
+
+# Convenience name for target.
+gemm/CMakeFiles/gemm7_no_BC_z_order.dir/rule:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/gemm7_no_BC_z_order.dir/rule
+.PHONY : gemm/CMakeFiles/gemm7_no_BC_z_order.dir/rule
+
+# Convenience name for target.
+gemm7_no_BC_z_order: gemm/CMakeFiles/gemm7_no_BC_z_order.dir/rule
+.PHONY : gemm7_no_BC_z_order
+
+# fast build rule for target.
+gemm7_no_BC_z_order/fast:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build.make gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build
+.PHONY : gemm7_no_BC_z_order/fast
 
 # Convenience name for target.
 gemm/CMakeFiles/gemm_cublas_v1.dir/rule:
@@ -328,12 +342,36 @@ gemm6_double_buffer.cu.s:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/gemm6_double_buffer.cu.s
 .PHONY : gemm6_double_buffer.cu.s
 
+gemm7_no_BC_z_order.o: gemm7_no_BC_z_order.cu.o
+.PHONY : gemm7_no_BC_z_order.o
+
+# target to build an object file
+gemm7_no_BC_z_order.cu.o:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build.make gemm/CMakeFiles/gemm7_no_BC_z_order.dir/gemm7_no_BC_z_order.cu.o
+.PHONY : gemm7_no_BC_z_order.cu.o
+
+gemm7_no_BC_z_order.i: gemm7_no_BC_z_order.cu.i
+.PHONY : gemm7_no_BC_z_order.i
+
+# target to preprocess a source file
+gemm7_no_BC_z_order.cu.i:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build.make gemm/CMakeFiles/gemm7_no_BC_z_order.dir/gemm7_no_BC_z_order.cu.i
+.PHONY : gemm7_no_BC_z_order.cu.i
+
+gemm7_no_BC_z_order.s: gemm7_no_BC_z_order.cu.s
+.PHONY : gemm7_no_BC_z_order.s
+
+# target to generate assembly for a file
+gemm7_no_BC_z_order.cu.s:
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build.make gemm/CMakeFiles/gemm7_no_BC_z_order.dir/gemm7_no_BC_z_order.cu.s
+.PHONY : gemm7_no_BC_z_order.cu.s
+
 gemm7_no_bankConf.o: gemm7_no_bankConf.cu.o
 .PHONY : gemm7_no_bankConf.o
 
 # target to build an object file
 gemm7_no_bankConf.cu.o:
-	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/gemm7_no_bankConf.cu.o
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_bankConf.dir/build.make gemm/CMakeFiles/gemm7_no_bankConf.dir/gemm7_no_bankConf.cu.o
 .PHONY : gemm7_no_bankConf.cu.o
 
 gemm7_no_bankConf.i: gemm7_no_bankConf.cu.i
@@ -341,7 +379,7 @@ gemm7_no_bankConf.i: gemm7_no_bankConf.cu.i
 
 # target to preprocess a source file
 gemm7_no_bankConf.cu.i:
-	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/gemm7_no_bankConf.cu.i
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_bankConf.dir/build.make gemm/CMakeFiles/gemm7_no_bankConf.dir/gemm7_no_bankConf.cu.i
 .PHONY : gemm7_no_bankConf.cu.i
 
 gemm7_no_bankConf.s: gemm7_no_bankConf.cu.s
@@ -349,7 +387,7 @@ gemm7_no_bankConf.s: gemm7_no_bankConf.cu.s
 
 # target to generate assembly for a file
 gemm7_no_bankConf.cu.s:
-	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/gemm7_no_bankConf.cu.s
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_bankConf.dir/build.make gemm/CMakeFiles/gemm7_no_bankConf.dir/gemm7_no_bankConf.cu.s
 .PHONY : gemm7_no_bankConf.cu.s
 
 gemm_2.o: gemm_2.cu.o
@@ -508,7 +546,8 @@ main.cpp.o:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_2DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_2DBlockTile.dir/main.cpp.o
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/main.cpp.o
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/main.cpp.o
-	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/main.cpp.o
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_bankConf.dir/build.make gemm/CMakeFiles/gemm7_no_bankConf.dir/main.cpp.o
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build.make gemm/CMakeFiles/gemm7_no_BC_z_order.dir/main.cpp.o
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v1.dir/build.make gemm/CMakeFiles/gemm_cublas_v1.dir/main.cpp.o
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/main.cpp.o
 .PHONY : main.cpp.o
@@ -525,7 +564,8 @@ main.cpp.i:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_2DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_2DBlockTile.dir/main.cpp.i
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/main.cpp.i
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/main.cpp.i
-	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/main.cpp.i
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_bankConf.dir/build.make gemm/CMakeFiles/gemm7_no_bankConf.dir/main.cpp.i
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build.make gemm/CMakeFiles/gemm7_no_BC_z_order.dir/main.cpp.i
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v1.dir/build.make gemm/CMakeFiles/gemm_cublas_v1.dir/main.cpp.i
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/main.cpp.i
 .PHONY : main.cpp.i
@@ -542,7 +582,8 @@ main.cpp.s:
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm4_2DBlockTile.dir/build.make gemm/CMakeFiles/gemm4_2DBlockTile.dir/main.cpp.s
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm5_float4.dir/build.make gemm/CMakeFiles/gemm5_float4.dir/main.cpp.s
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm6_double_buffer.dir/build.make gemm/CMakeFiles/gemm6_double_buffer.dir/main.cpp.s
-	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/no_bank_conflict.dir/build.make gemm/CMakeFiles/no_bank_conflict.dir/main.cpp.s
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_bankConf.dir/build.make gemm/CMakeFiles/gemm7_no_bankConf.dir/main.cpp.s
+	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm7_no_BC_z_order.dir/build.make gemm/CMakeFiles/gemm7_no_BC_z_order.dir/main.cpp.s
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v1.dir/build.make gemm/CMakeFiles/gemm_cublas_v1.dir/main.cpp.s
 	cd /home/cwwu/Desktop/Cuda/cuda_code/my_samples/build && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm_cublas_v2.dir/build.make gemm/CMakeFiles/gemm_cublas_v2.dir/main.cpp.s
 .PHONY : main.cpp.s
@@ -562,9 +603,10 @@ help:
 	@echo "... gemm4_2DBlockTile"
 	@echo "... gemm5_float4"
 	@echo "... gemm6_double_buffer"
+	@echo "... gemm7_no_BC_z_order"
+	@echo "... gemm7_no_bankConf"
 	@echo "... gemm_cublas_v1"
 	@echo "... gemm_cublas_v2"
-	@echo "... no_bank_conflict"
 	@echo "... MY_MUL_cublas_v1.o"
 	@echo "... MY_MUL_cublas_v1.i"
 	@echo "... MY_MUL_cublas_v1.s"
@@ -574,6 +616,9 @@ help:
 	@echo "... gemm6_double_buffer.o"
 	@echo "... gemm6_double_buffer.i"
 	@echo "... gemm6_double_buffer.s"
+	@echo "... gemm7_no_BC_z_order.o"
+	@echo "... gemm7_no_BC_z_order.i"
+	@echo "... gemm7_no_BC_z_order.s"
 	@echo "... gemm7_no_bankConf.o"
 	@echo "... gemm7_no_bankConf.i"
 	@echo "... gemm7_no_bankConf.s"

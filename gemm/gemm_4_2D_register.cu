@@ -61,7 +61,6 @@ __global__ void tile_2d_kernel(int M, int N, int K, float alpha, float *A, float
         A += BK;
         B += BK * N;
 
-        // for k 拿到里面性能下降严重
         for (int k = 0; k < BK; ++k) {  
             for (int m = 0; m < TM; ++m) {  
                 int A_row = threadIdx.y * TM + m;  
