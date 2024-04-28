@@ -1,1 +1,0 @@
-/usr/bin/g++ -g CMakeFiles/gemm_cublas_v1.dir/main.cpp.o CMakeFiles/gemm_cublas_v1.dir/MY_MUL_cublas_v1.cpp.o -o gemm_cublas_v1  -Wl,-rpath,/usr/local/cuda/lib64 /usr/local/cuda/lib64/libcublas.so /usr/local/cuda/lib64/libcudart.so 
