@@ -122,6 +122,7 @@ __global__ void matrixMul(const float *A, const float *B, float *C,
         *reinterpret_cast<float4 *>(&baseC[(i + 16) * N + 32]) = *reinterpret_cast<float4 *>(&regA[0]);
     }
 }
+
 void MY_MMult(cublasHandle_t handle, int M, int N, int K, float *A, int lda,
               float *B, int ldb, float *C, int ldc) {
 

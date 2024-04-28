@@ -83,9 +83,14 @@ for (int k = 0; k < BK; ++k) {  // 向量外积
 
 ![alt text](./images/bank_conflict_in_float4.png)
 
-这一部分可以看`大变化`中的策略（我没看懂，为什么这样就可以避免bank conflict）
+`gemm7_no_bankConf.cu`思路来源于`大变化`中的策略（我没看懂，为什么这样就可以避免bank conflict，**它只能消除store时候的bank conflict**,`ncu`结果如下图：
 
-李少侠大佬的z order避免bank conflict：**查看bank conflict目录下中的README中的资源链接2**
+![alt text](./images/only_store_no_BC_ncu.png)
+
+`gemm_7_no_BC_z_order.cu`李少侠大佬的z order避免bank conflict：**查看bank conflict目录下中的README中的资源链接2**，这个可以**完全消除load 和 store时候的bank conflict**，`ncu`结果如下图：
+
+![alt text](./images/z_order_ncu.png)
+
 
 ![alt text](./images/bank_conflict.png)
 
