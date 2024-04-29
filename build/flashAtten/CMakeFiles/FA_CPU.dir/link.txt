@@ -1,1 +1,0 @@
-/usr/bin/g++ -g CMakeFiles/FA_CPU.dir/FA.cpp.o -o FA_CPU 

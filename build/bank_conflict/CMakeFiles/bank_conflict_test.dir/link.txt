@@ -1,1 +1,0 @@
-/usr/bin/g++ CMakeFiles/bank_conflict_test.dir/test.cu.o -o bank_conflict_test  -lcudadevrt -lcudart_static -lrt -lpthread -ldl  -L"/usr/local/cuda/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda/targets/x86_64-linux/lib"
