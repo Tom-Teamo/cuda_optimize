@@ -309,7 +309,7 @@ $$
 ## resources
 1. [mma in PTX](https://docs.nvidia.com/cuda/parallel-thread-execution/index.html#matrix-multiply-accumulate-operation-using-mma-instruction)
 2. [Inline PTX Assembly in CUDA](https://docs.nvidia.com/cuda/inline-ptx-assembly/index.html)
-3. 
-> https://forums.developer.nvidia.com/t/wmma-what-does-warp-matrix-operations-mean/229732/4
-
-> https://github.com/c3sr/tcu_scope/tree/master
+3. [一步步优化tensor core上的GEMM(主要参考文章)](https://zhuanlan.zhihu.com/p/638522893)
+4. [深入分析CUTLASS系列](https://zhuanlan.zhihu.com/p/679929705)
+5. [CUTLASS 3.x 异构编程随感](https://zhuanlan.zhihu.com/p/689829403?utm_psn=1757913209187926016)
+6. [cute 之 Swizzle](https://zhuanlan.zhihu.com/p/671419093)
