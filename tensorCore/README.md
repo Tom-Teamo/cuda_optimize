@@ -32,7 +32,7 @@ in the `wmma.cu` file, I use the thrust library to create the host and device ma
 8. `9_ldmatrix.cu`：使用`ldmatrix`指令优化
 
 ### 分块矩阵乘法的原理
-![alt text](image.png)
+![alt text](./images/image.png)
 
 ### baseline
 #### BLOCK and GRID
@@ -40,7 +40,7 @@ BLOCK_DIM：128 包含4个warp(x,y,z,u)。每个warp负责计算大小为64*32�
 
 A B矩阵沿着K方向每次将`k=8`长度的矩阵送入shared memory，直至`K`方向上所有计算完成，即完成C矩阵中的128*64的矩阵的计算。运算正确性由上一节的分块矩阵乘法的原理保证。
 
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 
 #### load from A and B C
 **A矩阵是row-major的**，将A矩阵送入shared memory中时，由于一个block只有128threads，所以每个线程需要搬运k个数据。在此，通过`threadIdx.x * 8`将每个线程的起始index对应于下图A矩阵最左侧的蓝色区域，同时，通过大小为K的循环，每个线程负责搬运的数据为一行。源码中，`tile`代表着一个线程负责搬运的数据点。
@@ -85,10 +85,10 @@ __device__ void loadtileC(MMAarguments &arg, ElementOutput *C)
     }
 }
 ```
-![alt text](image-2.png)
+![alt text](./images/image-2.png)
 
 #### mma计算
-![alt text](image-3.png)
+![alt text](./images/image-3.png)
 
 
 BLOCK内是有4个warp的，每个warp负责计算的结果是64*32大小的矩阵，也就是说**一个warp需要计算16次大小为m16n8k8的mma操作**。有颜色的小矩阵代表一次mma操作。
@@ -165,7 +165,7 @@ bank conflict的优化方法应该在性能调优的靠后的位置上进行，�
 ### async
 
 #### 异步数据传输简介
-![alt text](image-5.png)
+![alt text](./images/image-5.png)
 CUDA 11 引入了一个新的async copy(异步拷贝)API来利用 A100 GPU 硬件加速将数据从global memory(全局内存) 直接拷贝到shared memory(共享内存)。异步拷贝会执行从全局内存到共享内存的异步(非阻塞)直接内存传输(旁路SM，也就是不经过寄存器)，它将"从全局内存加载数据到寄存器"和"将数据从寄存器写入共享内存"这两个操作结合成单个且高效的操作。
 
 异步拷贝消除了通过寄存器存储中间数据的需要，进而减少了所需的寄存器访问带宽。它有效地利用了存储带宽并且降低了功耗。正如它的名字所表明，异步拷贝是异步完成的，允许其他的计算和从全局内存到共享内存的数据搬运同时发生。异步拷贝通过新的同步特性来通知程序数据搬运的完成。
@@ -277,13 +277,13 @@ const int iters = (arg.problem_size.k() + K - 1) / K;
 
 ### prefetch optimize
 这里将预取的数据增大了一倍，并且显式地调用同步指令`cp.async.waitgroup N`来确保数据已经拷贝完成，主要流程如下图片:
-![alt text](image-4.png)
+![alt text](./images/image-4.png)
 
 但是实测下来，发现这种方式并没有提升性能，反而降低了性能。猜测：**可能是因为数据预取的数据量过大，导致超出了硬件所允许的shared memory的使用限制（可能是thread级别的限制 也可能是block级别的限制）**。
 
 ### reshape and register A B
 调整后每个warp计算由32x64变为64x64。同样的block中还是4个warp，所以最终block计算的大小由64x128变为128x128。
-![alt text](image-6.png)
+![alt text](./images/image-6.png)
 
 
 对于上图一个warp负责的那1/4的矩阵来说，每一的小矩阵的计算所需要的A矩阵是一样的，也就是说这一行的计算每个线程在A矩阵上对应的fragment是一样的(右边的图上的对应规则)。所以，在整个1/4矩阵的计算过程中，每个线程负责的A矩阵的Fragment所包含的数据只有4*4(因为4行)=16。
