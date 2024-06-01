@@ -41,6 +41,9 @@ target_link_libraries(gemm7_no_bankConf PRIVATE CUDA::cublas CUDA::cudart)
 add_executable(gemm7_no_BC_z_order main.cpp gemm7_no_BC_z_order.cu)
 target_link_libraries(gemm7_no_BC_z_order PRIVATE CUDA::cublas CUDA::cudart)
 
+add_executable(z_lishaoxia_gemm z_lishaoxia_gemm.cu)
+target_link_libraries(z_lishaoxia_gemm PRIVATE CUDA::cublas CUDA::cudart)
+
 add_executable(gemm_cublas_v1 main.cpp MY_MUL_cublas_v1.cpp)
 target_link_libraries(gemm_cublas_v1 PRIVATE CUDA::cublas CUDA::cudart)
 

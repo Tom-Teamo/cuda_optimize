@@ -72,17 +72,41 @@ for (int k = 0; k < BK; ++k) {  // 向量外积
 
 因此除了上述提高计算强度，我们还可以通过`float4`提高访存的效率。相比于访存 4 次获取 4 个浮点数，通过 float4 向量内存指令所需的访存指令数更少，减少了对内存访问的竞争；另一方面，使用向量加载每个字节需要的索引计算更少，我们只需要计算一次索引即可读取 4 个浮点数
 
-![alt text](./images/float4.png)
+![alt text](./images/bank_conflict_in_float4.png)
 
 **为什么需要transpose As**？因为后续的计算过程中读取As中的大小为TM的一列，如果不Transpose，那么无法通过`float4`读取。
+
+**Transpose之后就不能实现float4 store了，就像上图一样，按照As中的float一个个store**。只不过store的时候一个thread 负责 4大小的一列，tid为0的thread负责As中的第一列，tid为1的thread负责tid为0的下面一列。**由于warp内天然同步，所以图中用四个颜色标识出来了(应该是一个warp内标识的，图中As全部标识了，是错误的)**
 
 需要注意，因为使用了 FLOAT4 访存的缘故，矩阵的元素数量必须是 4 的倍数，不再能够支持任意大小的矩阵（实际上，还是可以支持的，但是边界条件需要更加细致的判断，对性能有所影响）
 
 ### 消除 bank conflict
-`float4`中的store shared memory 的 情况如下图所示，根据`float4`中bank conflict情况来看，其实是没有bank conflict的，**因为不能合并，所以4次wavefont，每个wavefront中是没有bank conflict的**，测试代码可以看bank_conflict文件夹下的测试`case 6`。
+
+#### store时bank conflict分析
+##### As中
+`float4`中的store shared memory 的 情况如下图所示：
 
 ![alt text](./images/bank_conflict_in_float4.png)
 
+可以看到在Store As的时候，线程奇数和偶数的线程会产生bank conflict，**本质上这是由于BK=8，BM=128（32的倍数），所以相邻的两个线程写入的是同一个bank**。
+
+**解决办法**：将BM + 4，作为新的BM，这样的话相邻的两个线程写入的bank 偏移就是4 * 4(* 4 是因为图中颜色一样的差了4行)。同一个warp内访问的bank index 就是：0-16-1-17-...-15-31，从而解决了bank conflict的问题。
+
+##### Bs
+warp中32*4=128，所以一个warp内的线程刚好负责一个B_Sub中的一行。由于使用的是`LDS.128`指令，一个quarter warp=8内，8*4=32刚好访问的是所有bank 所以 **Bs中store是没有bank conflict，只不过是4次wavefont**。
+
+#### load时z-order分析
+z-order中的线程排布如下图所示：
+
+![alt text](./images/bank_conflict.png)
+
+As和Bs中的bank情况如下图：
+
+![alt text](./images/z_order_bank_conflict.png)
+
+图中的上半部分是Bs中的情况，下半部分是As中的情况，由于一个thread负责的是8*8大小，所以即使是`float4`指令，Bs和As也需要两个指令才能加载完当前thread计算所需要的As和Bs数据。可以看到，**在half warp内，Bs中是间隔为2访问地址一致，As中是间隔为1访问的地址一致，所以都可以合并，并且没有bank conflict！！**
+
+### 代码实现
 `gemm7_no_bankConf.cu`思路来源于`大变化`中的策略（我没看懂，为什么这样就可以避免bank conflict，**它只能消除store时候的bank conflict**,`ncu`结果如下图：
 
 ![alt text](./images/only_store_no_BC_ncu.png)
@@ -90,9 +114,6 @@ for (int k = 0; k < BK; ++k) {  // 向量外积
 `gemm_7_no_BC_z_order.cu`李少侠大佬的z order避免bank conflict：**查看bank conflict目录下中的README中的资源链接2**，这个可以**完全消除load 和 store时候的bank conflict**，`ncu`结果如下图：
 
 ![alt text](./images/z_order_ncu.png)
-
-
-![alt text](./images/bank_conflict.png)
 
 
 ## Resource

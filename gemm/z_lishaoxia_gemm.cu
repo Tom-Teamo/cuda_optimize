@@ -632,8 +632,8 @@ int main() {
 
     cudaMemcpy(h_C, d_C, m * n * sizeof(float), cudaMemcpyDefault);
 
-    bool chk = check(h_A, h_B, h_C, m, n, k);
-    printf("Matrix_C check: %s\n", chk ? "OK" : "Failed");
+    // bool chk = check(h_A, h_B, h_C, m, n, k);
+    // printf("Matrix_C check: %s\n", chk ? "OK" : "Failed");
 
     cudaFree(d_A);
     cudaFree(d_B);

@@ -35,6 +35,11 @@ __global__ void matrixMul(const float *A, const float *B, float *C,
     const float *baseA = A + baseY * K;
     const float *baseB = B + baseX;
 
+    // 利用位运算 计算很巧妙！
+    // 从A中读取到As中 将Bk分为4-4 按照 thread_id 优先完成BK维度 再完成BM维度
+    // rowB 需要 除以32是因为 BN=128 / 4 = 32
+    // 0...,001,111,111
+    // x,xxx,xxx -> x,xxx,x00 只需要最后七位是因为BN为128(0-127)，最多就是127，<< 可能会导致有符号数的符号位受到影响
     int rowA = baseIdx >> 1, rowB = baseIdx >> 5, colA = (baseIdx & 1) << 2, colB = (baseIdx << 2) & 127;
     int warpId = baseIdx >> 5, warpBaseId = baseIdx & 31;
     int rowC = ((warpId >> 1 << 3) + ((warpBaseId >> 4) << 1) + (warpBaseId & 1)) << 2, colC = (((warpId & 1) << 4) + ((warpBaseId & 15) >> 1)) << 2;
@@ -128,7 +133,7 @@ void MY_MMult(cublasHandle_t handle, int M, int N, int K, float *A, int lda,
 
     dim3 threadsPerBlock(BLOCK_SIZE, BLOCK_SIZE);
     dim3 numBlocks((M + BLOCK_M - 1) / BLOCK_M, (N + BLOCK_N - 1) / BLOCK_N);
-
+ 
     const int alpha = 1.0;
     const int beta = 0.0;
 
