@@ -1,5 +1,6 @@
 import math
 import torch
+from torch import nn
 from torch.nn import functional as F
 from torch.utils.cpp_extension import load
 
@@ -18,16 +19,24 @@ v = torch.randn(batch_size, n_head, seq_len, head_embd).cuda()
 
 print('=== profiling manual attention ===')
 
+torch_mHead = nn.MultiheadAttention(embed_dim=head_embd*n_head, num_heads=n_head, batch_first=True).to('cuda')
+
 # Our minimal flash attention aims to be faster than this by avoiding HBM read/writes of N^2 matrices.
 def manual_attn(q, k, v):
     att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
     att = F.softmax(att, dim=-1)
     y = att @ v
+    # q = q.view(q.shape[0], seq_len, -1)
+    # k = k.view(q.shape[0], seq_len, -1)
+    # v = v.view(q.shape[0], seq_len, -1)
+    # y, _ = torch_mHead(q, k, v)
     return y
 
 with torch.autograd.profiler.profile(use_cuda=True) as prof:
     manual_result = manual_attn(q, k, v)
 print(prof.key_averages().table(sort_by='cuda_time_total', row_limit=10))
+
+# manual_result = manual_result.reshape(batch_size, n_head, seq_len, head_embd)
 
 print('=== profiling minimal flash attention === ')
 

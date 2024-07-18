@@ -6,8 +6,8 @@ The below parameters set this range of values that p takes on
 // #define PLAST  6144
 // #define PINC   256
 
-#define PFIRST 4096
-#define PLAST  4096
+#define PFIRST 256
+#define PLAST  6144
 #define PINC   256
 /* 
 In the test driver, the m, n, and k dimensions are set to the below 

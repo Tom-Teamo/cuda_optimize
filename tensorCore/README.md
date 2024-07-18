@@ -31,12 +31,15 @@ in the `wmma.cu` file, I use the thrust library to create the host and device ma
 7. `8_swizzle.cu`：使用CUTLASS中的swizzle技术优化
 8. `9_ldmatrix.cu`：使用`ldmatrix`指令优化
 
+
+![alt text](./images/image7.png)
+
 ### 分块矩阵乘法的原理
 ![alt text](./images/image.png)
 
 ### baseline
 #### BLOCK and GRID
-BLOCK_DIM：128 包含4个warp(x,y,z,u)。每个warp负责计算大小为64*32大小的矩阵。由于`m16n8k8`，所以每个warp计算16个`mma`操作。
+BLOCK_DIM：(128, 1, 1)，包含4个warp：x,y,z,u。每个warp负责计算大小为64*32大小的矩阵，由于`m16n8k8`，所以每个warp计算16个`mma`操作。
 
 A B矩阵沿着K方向每次将`k=8`长度的矩阵送入shared memory，直至`K`方向上所有计算完成，即完成C矩阵中的128*64的矩阵的计算。运算正确性由上一节的分块矩阵乘法的原理保证。
 
@@ -90,11 +93,19 @@ __device__ void loadtileC(MMAarguments &arg, ElementOutput *C)
 #### mma计算
 ![alt text](./images/image-3.png)
 
+图中展示的是C/D矩阵中的元素和线程的对应关系。
 
 BLOCK内是有4个warp的，每个warp负责计算的结果是64*32大小的矩阵，也就是说**一个warp需要计算16次大小为m16n8k8的mma操作**。有颜色的小矩阵代表一次mma操作。
 
 使用的PTX指令为`mma.sync.aligned.m16n8k8.row.col.f32.tf32.tf32.f32`，根据Resource 1可以得到每次`mma`指令每个线程分配到的fragment，所以**每个线程负责获取到该次`mma`操作该线程负责的数据**。我们以其中一次`mma`操作中的C矩阵的index计算为例：
-```
+```cpp
+// warp index from 0 to 3
+const int warpidx = threadIdx.x / 32;
+// 4 warps in block, so the row and column of this warp
+const int rowwarp = warpidx / 2;
+const int colwarp = warpidx % 2;
+// thread index in this warp
+const int laneidx = threadIdx.x % 32;
 for (int tileidx = 0; tileidx < 16; tileidx++)
 {
     // 4 * 4 mma operations in one warp, so the row and column index from 0 to 3
@@ -109,27 +120,34 @@ for (int tileidx = 0; tileidx < 16; tileidx++)
 }
 ```
 
-`laneidx / 4`是计算在上图中的第几行，`laneidx % 4`是计算在上图中的第几列(一共4列，每列是两个元素的)。这里的`tile`指的是哪个小绿色矩阵。
+这里的`tileidx`大小为16，指的是上图中的小绿色矩阵。`tileidx / 4`是计算在上图中的第几行，`tileidx % 4`是计算在上图中的第几列(一共4列，每列是两个元素的)。
+
+对于图中`c0`的计算：shared memory中C的大小为`(128,64)`，所以c0元素的index计算分为row_c0*64(因为是128*64中的64)+col_c0。
+1. **计算行row_c0**。上述代码中，`rowwarp * 64`表示rowwarp，由于一个warp负责64*32，所以拥有64行；`rowtile * M`表示在一个warp中的tile的行index，所以需要乘以M=16；由于每个thread负责4个C中的数据，从上图可以看出，一次`mma`内，C矩阵中前8行中threadid每隔4就换一行，所以`laneidx / 4`表示当前c0所在的行；至此，该线程的row_c0计算完成；
+2. **计算col_c0**：`colwarp * 32 + coltile * N + laneidx % 4 * 2`。`colwarp * 32`表示当前warp负责的矩阵所在的列，由于一个warp负责64x32，所以下乘32；`coltile * N`表示当前tile所在的列，由于m16n8k8，所以乘以n=8；`laneidx % 4 * 2`在上图中即体现为列被分成了4部分，`laneidx % 4`即为当前thread在第几部分，`*2`是因为一个部分2个元素。至此，该线程的col_c0计算完成。
+
+对于后续`c1 c2 c3`的计算，只需要注意，`c2`与`c0`相差8行，但是C矩阵在shared memory中行优先存储，所以需要乘以C的列数即64；
+
 > 在PTX中，有公式计算index的
 
 ```
 asm volatile(
     "mma.sync.aligned.m16n8k8.row.col.f32.tf32.tf32.f32 "
     "{%0,%1,%2,%3}, {%4,%5,%6,%7}, {%8,%9}, {%10,%11,%12,%13};\n"
-    : "=f"(C[cd[0]]),                                     // D[0]   32bit
-        "=f"(C[cd[1]]),                                     // D[1]
-        "=f"(C[cd[2]]),                                     // D[2]
-        "=f"(C[cd[3]])                                      // D[3]
-    : "r"(*reinterpret_cast<uint32_t const *>(&A[a[0]])), // A[0]   32bit
-        "r"(*reinterpret_cast<uint32_t const *>(&A[a[1]])), // A[1]
-        "r"(*reinterpret_cast<uint32_t const *>(&A[a[2]])), // A[2]
-        "r"(*reinterpret_cast<uint32_t const *>(&A[a[3]])), // A[3]
-        "r"(*reinterpret_cast<uint32_t const *>(&B[b[0]])), // B[0]
-        "r"(*reinterpret_cast<uint32_t const *>(&B[b[1]])), // B[1]
-        "f"(C[cd[0]]),                                      // C[0]
-        "f"(C[cd[1]]),                                      // C[1]
-        "f"(C[cd[2]]),                                      // C[2]
-        "f"(C[cd[3]])                                       // C[3]
+    : "=f"(C[cd[0]]),                                     
+        "=f"(C[cd[1]]),                                    
+        "=f"(C[cd[2]]),                                    
+        "=f"(C[cd[3]])                                      
+    : "r"(*reinterpret_cast<uint32_t const *>(&A[a[0]])),
+        "r"(*reinterpret_cast<uint32_t const *>(&A[a[1]])),
+        "r"(*reinterpret_cast<uint32_t const *>(&A[a[2]])),
+        "r"(*reinterpret_cast<uint32_t const *>(&A[a[3]])),
+        "r"(*reinterpret_cast<uint32_t const *>(&B[b[0]])),
+        "r"(*reinterpret_cast<uint32_t const *>(&B[b[1]])),
+        "f"(C[cd[0]]),
+        "f"(C[cd[1]]),
+        "f"(C[cd[2]]),
+        "f"(C[cd[3]])
 );
 ```
 1. 为什么要使用`=f`？
@@ -191,7 +209,7 @@ __shared__ ElementInputA tileA[128 * 8];
 __shared__ ElementInputB tileB[8 * 64];
 ElementOutput C_fragment[64];
 ```
-由于block中的计算，每个warp中的计算都需要不同的A B中的数据，因此A B中的数据存储在shared memory中是合理的，但是对于C来说，每个线程需要用到的C是一样的，线程之间不会发生访问对方负责的C，所以**C是应该使用寄存器存储的**！
+由于block中的计算，每个warp中的计算都需要不同的A B中的数据，因此A B中的数据存储在shared memory中是合理的，但是对于C来说，每个线程负责的C是固定不变的，线程之间不会发生访问对方负责的C，所以**C是应该使用寄存器存储的**！
 
 每次`mma`操作，每个线程负责的是4个输出数据，在每个warp中，一共有4*4次`mma`操作，所以每个线程最终需要的是4*4*4=64个数据，也就是说，每个线程需要64个寄存器来负责C的数据。
 
@@ -289,6 +307,22 @@ const int iters = (arg.problem_size.k() + K - 1) / K;
 对于上图一个warp负责的那1/4的矩阵来说，每一的小矩阵的计算所需要的A矩阵是一样的，也就是说这一行的计算每个线程在A矩阵上对应的fragment是一样的(右边的图上的对应规则)。所以，在整个1/4矩阵的计算过程中，每个线程负责的A矩阵的Fragment所包含的数据只有4*4(因为4行)=16。
 
 ### threadblock swizzle
+> [how to understand "block swizzling" in CUTLASS](https://github.com/NVIDIA/cutlass/issues/1017): It just lets neighboring SMs to visit data close to each other in the global memory so likely L2 hit rate can be increased.
+这个swizzle最核心的就是对于 blockIdx 进行如下变换:
+```
+blockIdx.x ==> block_idx_x >> log_tile
+blockIdx.y ==> (block_idx_y << log_tile) + ((block_idx_x) & ((1 << (log_tile)) - 1))
+blockIdx.z ==> blockIdx.z
+```
+
+看了上面的变换公式，你可能还是一头雾水，其实我们来用一张图来简单说明(log_tile=2), 假如我们启动了一个kernel，它的gridDim为(16,1,1)(即下图中左边的分布)，那么经过 swizzle变换后得到下图中右边的分布，所以我们可以发现 swizzle 后的线程块在2D分布上满足局部性原理，那这样有什么好处呢，好处就是可以尽量提升L2缓存的命中率或L2缓存中的数据复用。
+```
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  |  0  4  8  12
+                                       |  1  5  9  13 
+                                       |  2  6 10  14
+                                       |  3  7 11  15
+```
+
 如果我们不做block swizzle，用代数表达每个threadblock的tile是(tbm, tbn)，那么我们可以看出线程块是先按照axis n发射$(n+(tbn-1)/tbn)$个，然后再遍历 axis m，如果n非常大，那么我们相当于先做了一个长方形的矩阵乘法，那么每一个发射的block读取的右矩阵的global位置都是不同的，访存量用公式表示为:
 $$
 mem = left_mem * l_num + right_mem * r_num;  

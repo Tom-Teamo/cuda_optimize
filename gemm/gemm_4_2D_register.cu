@@ -98,7 +98,7 @@ void MY_MMult(cublasHandle_t handle, int M, int N, int K, float *A, int lda,
     // BM 也必须整除 TM，BM TM是算法内部设计死的 所以只要代码里面满足就可以了 不像m n k 是用户输入的
 
     const int size = 16;
-    const int tile_size = 8;
+    const int tile_size = 6;
     const int BM = size * tile_size;
     const int BN = size * tile_size;
     const int BK = size;

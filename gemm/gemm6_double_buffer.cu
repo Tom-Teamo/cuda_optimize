@@ -10,18 +10,6 @@
 #define FETCH_FLOAT4(pointer) (reinterpret_cast<float4*>(&(pointer))[0])
 
 
-/*
-之前，我们只有一个As，那么在每次迭代(As Bs移动)的过程中，为了保证当前的线程已经完成了当前As和Bs的计算（从而才能第二次迭代的As和Bs的写数据）
-我们使用了第二个__sync，保证 Write-After-Read
-
-它本质上是因为我们在不同迭代中使用了同一块空间来保存我们所需的数据，这两次迭代中的数据之间并不存在真正的依赖关系
-
-如果我们将其写入到其他地址上，那么就不需要使用同步了。
-
-因此，我们开辟了两倍的As和Bs的空间，如果当前使用的是As1和Bs1，那么下次迭代就使用As2 Bs2，从而使得两次迭代之间不存在依赖关系，从而避免第二次同步操作
-
-*/
-
 template <const int BM, const int BN, const int BK, const int TM, const int TN>
 __global__ void tile_2d_float4_double_buffering_kernel(int M, int N, int K, float alpha, float *A, float *B, float beta, float *C) {
     const int block_row_thread = BN / TN;

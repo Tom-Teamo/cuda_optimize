@@ -55,8 +55,6 @@ __global__ void sgemm(int m, int n, int k, float *a, float *b, float *c)
     c[(BLOCK * bx + ty) * n + BLOCK * by + tx] = sum;
 }
 
-
-
 void MY_MMult(cublasHandle_t handle, int m, int n, int k, float *d_A, int lda,
               float *d_B, int ldb, float *d_C, int ldc) {
 
@@ -64,7 +62,5 @@ void MY_MMult(cublasHandle_t handle, int m, int n, int k, float *d_A, int lda,
     dim3 block(BLOCK, BLOCK);
     dim3 grid((m + BLOCK - 1) / BLOCK, (n + BLOCK - 1) / BLOCK);
 
-    // The expression (m + BLOCK - 1) / BLOCK is a common idiom to 
-    // round up m / BLOCK.
     sgemm<BLOCK><<<grid, block>>>(m, n, k, d_A, d_B, d_C);
 }

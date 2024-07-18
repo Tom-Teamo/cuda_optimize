@@ -20,22 +20,9 @@
     block内最大的sMem：99KB
 */
 
-/*
-这要求M是BM的倍数，N是BN的倍数，K是BK的倍数
-
-什么是 1维 tile？
-    之前，需要计算C矩阵中的Bc:[BLOCK, BLOCK]大小的数据（因为矩阵大小未知 sharedMem有限 因此也需要分块）
-        block中是需要 BLOCK* BLOCK 数量的线程的，每个线程计算Bc中的一个元素
-    
-    现在，需要计算C矩阵中的Bc:[BLOCK, BLOCK]大小的数据
-        我们让每个线程读取[BLOCK, 1]大小的数据
-        每个线程同样计算 [BLOCK, 1]大小的Bc的数据（下列代码每个线程计算Bc中的一列）
-*/
-
 
 #define OFFSET(row, col, stride) ((row) * (stride) + (col))
 #define CEIL_DIV(M, N) (((M) + (N - 1)) / (N))
-#define FETCH_FLOAT4(pointer) (reinterpret_cast<float4*>(&(pointer))[0])
 
 template <const int BM, const int BN, const int BK, const int TM>
 __global__ void tile_1d_kernel(int M, int N, int K, float alpha, float *A, float *B, float beta, float *C) {
@@ -92,16 +79,14 @@ __global__ void tile_1d_kernel(int M, int N, int K, float alpha, float *A, float
 
 void MY_MMult(cublasHandle_t handle, int M, int N, int K, float *A, int lda,
               float *B, int ldb, float *C, int ldc) {
-    // 现在是什么情况呢
     // m n k 是要 整除 bm bn bk
     // BM 也必须整除 TM，BM TM是算法内部设计死的 所以只要代码里面满足就可以了 不像m n k 是用户输入的
 
     const int size = 16;
-    const int tile_size = 8;
-    const int BM = size * tile_size;
+    const int TM = 8;
+    const int BM = size * TM;
     const int BN = size;
     const int BK = size;
-    const int TM = tile_size;
 
     const int alpha = 1.0;
     const int beta = 0.0;

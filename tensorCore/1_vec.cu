@@ -424,9 +424,10 @@ __device__ void mma_tile(MMAarguments &arg, ElementInputA *A, ElementInputB *B, 
 
     int a[4], b[2], cd[4];
 
+    // 4 * 4 mma operations in one warp
     for (int tileidx = 0; tileidx < 16; tileidx++)
     {
-        // 4 * 4 mma operations in one warp, so the row and column index from 0 to 3
+        // the row and column index from 0 to 3
         int rowtile = tileidx / 4;
         int coltile = tileidx % 4;
         cd[0] = (rowwarp * 64 + rowtile * M + laneidx / 4) * 64 + colwarp * 32 + coltile * N + laneidx % 4 * 2;
@@ -521,7 +522,9 @@ __global__ void GEMM_MMA(MMAarguments arg)
 __global__ void GEMM_MMA_vec(MMAarguments arg)
 {
     __shared__ ElementInputA tileA[128 * 8];
+
     __shared__ ElementInputB tileB[8 * 64];
+
     __shared__ ElementOutput tileC[128 * 64];
 
     const int iters = (arg.problem_size.k() + K - 1) / K;
