@@ -1,6 +1,6 @@
 # softmax
 
-输入矩阵大小：[M, K]
+输入矩阵大小：`[M, K]`
 
 ## Warp Reduction - When K is small
 
