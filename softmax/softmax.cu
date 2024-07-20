@@ -578,6 +578,9 @@ __global__ void softmax_block_smem(
 // threads. If there is no waste, we would like it to be as large as possible to
 // achieve higher concurrency (e.g 1024). Each thread processes K/block_size
 // columns. Each block processes block_size columns. Each grid processes M rows.
+
+// T: vec246 ACT_T：float n:K
+// m: M
 template <typename T, typename ACT_T, size_t n>
 inline cudaError_t LaunchSoftmaxBlockAll(
     const T *input,
@@ -904,8 +907,10 @@ void LaunchSoftmaxK1Small(
     int grid_dim_x =
         (batch_size + thread_group_per_block - 1) / thread_group_per_block;
     dim3 grid(grid_dim_x);
+    // 16 8: 16个threads为一组，处理一行，一个block处理8行
     dim3 block(thread_group_width, thread_group_per_block);
 
+    // 8：每个线程负责8个元素
     softmax_stored_locally_multi_dim<T, T, 8>
         <<<grid, block, 0, stream>>>(input, output, batch_size, NElements);
 
