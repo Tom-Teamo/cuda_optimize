@@ -8,7 +8,6 @@ This is the usage of the warp matrix operations with the warp matrix operations 
 
 两者之间的关系：
 
-
 ## wwma 接口
 对应的代码在`wmma.cu`中。
 
@@ -19,7 +18,7 @@ This is the usage of the warp matrix operations with the warp matrix operations 
 in the `wmma.cu` file, I use the thrust library to create the host and device matrix. For more infomation, see [thrust](https://docs.nvidia.com/cuda/thrust/index.html) and [thrust pdf](https://docs.nvidia.com/cuda/pdf/Thrust_Quick_Start_Guide.pdf).
 
 ## mma 接口
-本文使用了`mma`指令，**优化Tensor Core上的GEMM**。
+本文使用了`mma`指令，**输入数据类型为`tf32`，输出数据类型为`float`，矩阵乘积大小为`m16n8k8`，优化Tensor Core上的GEMM**。
 
 主要的尝试以及对应的源代码文件：
 1. `1_vec.cu`：使用`float4`指令来优化数据传输
@@ -30,7 +29,6 @@ in the `wmma.cu` file, I use the thrust library to create the host and device ma
 6. `7_reshape.cu`：增加计算强度
 7. `8_swizzle.cu`：使用CUTLASS中的swizzle技术优化
 8. `9_ldmatrix.cu`：使用`ldmatrix`指令优化
-
 
 ![alt text](./images/image7.png)
 
@@ -70,6 +68,7 @@ __device__ void loadtileB(MMAarguments &arg, ElementInputB *B, int idx)
         int colB = blockIdx.x * 64 + tileIdx / K;
 
         B[tileIdx] = rowB < arg.problem_size.k() && colB < arg.problem_size.n() ? arg.B[colB * arg.problem_size.k() + rowB] : ElementInputB(0);
+    }
 }
 ```
 
@@ -116,7 +115,14 @@ for (int tileidx = 0; tileidx < 16; tileidx++)
     cd[2] = cd[0] + 8 * 64;
     cd[3] = cd[2] + 1;
 
-    ......
+    a[0] = (rowwarp * 64 + rowtile * M + laneidx / 4) * K + laneidx % 4;
+    a[1] = a[0] + 8 * K;
+    a[2] = a[0] + 4;
+    a[3] = a[1] + 4;
+
+    b[0] = (colwarp * 32 + coltile * N + laneidx / 4) * K + laneidx % 4;
+    b[1] = b[0] + 4;
+    // 见下一块代码
 }
 ```
 
@@ -130,7 +136,7 @@ for (int tileidx = 0; tileidx < 16; tileidx++)
 
 > 在PTX中，有公式计算index的
 
-```
+```cpp
 asm volatile(
     "mma.sync.aligned.m16n8k8.row.col.f32.tf32.tf32.f32 "
     "{%0,%1,%2,%3}, {%4,%5,%6,%7}, {%8,%9}, {%10,%11,%12,%13};\n"
@@ -184,6 +190,7 @@ bank conflict的优化方法应该在性能调优的靠后的位置上进行，�
 
 #### 异步数据传输简介
 ![alt text](./images/image-5.png)
+
 CUDA 11 引入了一个新的async copy(异步拷贝)API来利用 A100 GPU 硬件加速将数据从global memory(全局内存) 直接拷贝到shared memory(共享内存)。异步拷贝会执行从全局内存到共享内存的异步(非阻塞)直接内存传输(旁路SM，也就是不经过寄存器)，它将"从全局内存加载数据到寄存器"和"将数据从寄存器写入共享内存"这两个操作结合成单个且高效的操作。
 
 异步拷贝消除了通过寄存器存储中间数据的需要，进而减少了所需的寄存器访问带宽。它有效地利用了存储带宽并且降低了功耗。正如它的名字所表明，异步拷贝是异步完成的，允许其他的计算和从全局内存到共享内存的数据搬运同时发生。异步拷贝通过新的同步特性来通知程序数据搬运的完成。
@@ -211,7 +218,7 @@ ElementOutput C_fragment[64];
 ```
 由于block中的计算，每个warp中的计算都需要不同的A B中的数据，因此A B中的数据存储在shared memory中是合理的，但是对于C来说，每个线程负责的C是固定不变的，线程之间不会发生访问对方负责的C，所以**C是应该使用寄存器存储的**！
 
-每次`mma`操作，每个线程负责的是4个输出数据，在每个warp中，一共有4*4次`mma`操作，所以每个线程最终需要的是4*4*4=64个数据，也就是说，每个线程需要64个寄存器来负责C的数据。
+每次`mma`操作，每个线程负责的是4个输出数据，在每个warp中，一共有4x4次`mma`操作，所以每个线程最终需要的是4x4x4=64个数据，也就是说，每个线程需要64个寄存器来负责C的数据。
 
 由于C中的数据使用线程私有的寄存器存储，那么在整体的计算过程中，C从global memory到寄存器的数据搬运就不能按照之前的方式了，需要考虑到后面的`mma`operation每个线程所需要的数据；同样写回到全局内存时候，也需要考虑到这一情况。
 
@@ -308,6 +315,7 @@ const int iters = (arg.problem_size.k() + K - 1) / K;
 
 ### threadblock swizzle
 > [how to understand "block swizzling" in CUTLASS](https://github.com/NVIDIA/cutlass/issues/1017): It just lets neighboring SMs to visit data close to each other in the global memory so likely L2 hit rate can be increased.
+
 这个swizzle最核心的就是对于 blockIdx 进行如下变换:
 ```
 blockIdx.x ==> block_idx_x >> log_tile

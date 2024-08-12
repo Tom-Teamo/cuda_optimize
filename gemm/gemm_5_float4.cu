@@ -81,7 +81,7 @@ __global__ void tile_2d_kernel(int M, int N, int K, float alpha, float *A, float
                     FETCH_FLOAT4(B[OFFSET(b_tile_row + k, b_tile_col, N)]);
         }
         __syncthreads();
-        A += BK;    // Start position of next tile block to be processed
+        A += BK;        // Start position of next tile block to be processed
         B += BK * N;    // Start position of next tile block to be processed
 
         #pragma unroll

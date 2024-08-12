@@ -48,7 +48,7 @@ This is the algorithm proposed in Online Softmax paper [online softmax](https://
 
 FA把优化目标是单个Head的Attention计算内，N是seqence length长度、d是hidden dimension大小。
 
-如果没有softmax的话，我们可以把Q，K，V沿着N（seqence length维度）切成块，算完一块Q和一块K^T之后，立刻和一块V进行矩阵矩阵乘法运算（GEMM)。一方面，避免在HBM和SRAM中移动P矩阵了，另一方面，P矩阵也不需要被显式分配出来，消除了O(N^2) HBM存储的开销，从而达到了加速计算和节省显存的效果。
+如果没有softmax的话，我们可以把Q，K，V沿着N（seqence length维度）切成块，算完一块Q和一块K^T之后，立刻和一块V进行矩阵矩阵乘法运算（GEMM）。一方面，避免在HBM和SRAM中移动P矩阵了，另一方面，P矩阵也不需要被显式分配出来，消除了O(N^2) HBM存储的开销，从而达到了加速计算和节省显存的效果。
 
 可是麻烦出现在Softmax！Softmax需要对完整的QK^T结果矩阵沿着Inner Loop维度进行归一化。Softmax需要全局的max和sum结果才能scale每一个元素，因此本地算出一块QK^T的结果还不能立刻和V进行运算，还要等同一行的后面的QK^T都算完才能开始，这就造成依赖关系，影响计算的并行。
 

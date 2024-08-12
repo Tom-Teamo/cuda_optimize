@@ -4,22 +4,6 @@
 #include <cublas_v2.h>
 #include <mma.h>
 
-/*
-    各个compute capability下的技术细节：
-        https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#features-and-technical-specifications-technical-specifications-per-compute-capability
-
-    SM内最大的常驻blocks：16
-    SM内最大的常驻warp：48
-    SM内最大的常驻thread：1536
-
-    32-bit的寄存器数量：64k（k=1024）
-    block内最多的32-bit寄存器数量：64k
-    thread内最多的32-bit寄存器数量：255
-
-    SM内最大的sMem：100KB
-    block内最大的sMem：99KB
-*/
-
 
 #define OFFSET(row, col, stride) ((row) * (stride) + (col))
 #define CEIL_DIV(M, N) (((M) + (N - 1)) / (N))

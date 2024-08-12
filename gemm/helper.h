@@ -61,7 +61,7 @@ float compare_metrices(int m, int n, float *a, int lda,
             diff = my_abs(A(i,j) - B(i,j));
             max_diff = (diff > max_diff)? diff: max_diff;
             if (print && (max_diff > 0.5 || max_diff < -0.5)) {
-                printf("\n error: i %d  j %d diff %f", i, j, max_diff);
+                // printf("\n error: i %d  j %d diff %f", i, j, max_diff);
                 print = false;
             }
         }

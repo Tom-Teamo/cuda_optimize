@@ -15,24 +15,25 @@ __global__ void sgemm(int m, int n, int k, float *a, int lda, float *b, int ldb,
     int x = block_size * blockIdx.x + threadIdx.x;
     int y = block_size * blockIdx.y + threadIdx.y;
 
-    if (y < m && x < n) {
-        float sum = 0.0;
-        for (int i = 0; i < k; i++) {
-            sum += a[y * lda + i] * b[i * ldb + x];
-        }
-        c[y * ldc + x] = sum;
-    }
+    // if (y < m && x < n) {
+    //     float sum = 0.0;
+    //     for (int i = 0; i < k; i++) {
+    //         sum += a[y * lda + i] * b[i * ldb + x];
+    //     }
+    //     c[y * ldc + x] = sum;
+    // }
 
     /*
         if we exchange x and y, we will get a bad performance
+        because that c[], x changes fast than y, so c[] is not 连续
     */
-    // if (x < m && y < n) {
-    //     float sum = 0.0;
-    //     for (int i = 0; i < k; i++) {
-    //         sum += a[x * lda + i] * b[i * ldb + y];
-    //     }
-    //     c[x * ldc + y] = sum;
-    // }
+    if (y < m && x < n) {
+        float sum = 0.0;
+        for (int i = 0; i < k; i++) {
+            sum += a[x * lda + i] * b[i * ldb + x];
+        }
+        c[y * ldc + y] = sum;
+    }
 
 }
 

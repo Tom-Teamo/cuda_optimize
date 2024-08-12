@@ -55,7 +55,7 @@ mask = 1
 ## Block Reduction - When K is large
 理想情况下，warp内部的reduction是最快的。但是，我们需要寄存器来存储输入，每个线程需要存储`K/ 32 * pack_size * sizeof(dataType)`。**线程的寄存器资源有限**。当寄存器不足的时候，CUDA将自动使用shared memory，这使得warp reduction变得不太理想。当然，当`K`很大的时候，使用shared memory已经足够快了。
 
-**how to do block reduction?**因为我们需要在整个block中完成reduction，所以我们需要方法在线程之间完成同步，例如，我们需要使用shared memory。我们在每个warp内完成warp reduction，然后存储到shared memory，接着load到第一个warp中，再次执行reduction。
+**how to do block reduction?** 因为我们需要在整个block中完成reduction，所以我们需要方法在线程之间完成同步，例如，我们需要使用shared memory。我们在每个warp内完成warp reduction，然后存储到shared memory，接着load到第一个warp中，再次执行reduction。
 
 例如，假设我们的`blocksize`为112，这可以分解为`32+32+32+16`。我们首先在每个warp内reduce，然后我们存储到shared memory中的warp_max数组中，with`index = threadIdx.x / warp_size`，当`threadIdx.x < (blockDim.x / 32)`，我们读取shared memory中的值到第一个warp内的寄存器，例如`threadIdx.x = 0,1,2,3`(因为112被分成了4个warp)，最后在第一个warp内完成reduction。
 
